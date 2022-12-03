@@ -79,3 +79,12 @@
 // The component will re-render only when useSelector returns a new Value as compared to the prev Value. (means its on new memory) etc.
 
 // Memorization - is the process in which you cache the previous value of something so that if the input has not changed, then just return back the same output.
+
+///////////////////////////// 19 Typescript Basics_ Typing Monsters-Rolodex ///////////////////////////////////////////
+
+// Type and interfaces are mostly same. The only key difference b/w them is that Interface are extendable, you can extend them from any Interface.
+// and We can overload Interfaces means if we have two interfaces with same name. Then that interface will have the properties of both interfaces But not for Type.
+
+// Type - type allow us to do something known as U nion. Now, a union is essentially a combination of types. i.e type address = CanadianAddress | USAAddress | italianAddress
+
+// Union, Generic, Type, Interface - Typescript Basic Concepts

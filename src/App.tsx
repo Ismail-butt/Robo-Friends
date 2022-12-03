@@ -1,22 +1,29 @@
 import './App.css'
-import React, { useEffect, useState } from 'react'
-import axios from 'axios'
-import Header from './components/Header'
+import { useEffect, useState, ChangeEvent } from 'react'
+import SearchBox from './components/SearchBox'
 import CardList from './pages/CardList'
-import Scroll from './components/Scroll'
 import Spinner from './components/Spinner'
 import ErrorBoundry from './components/ErrorBoundry'
 
+import { getData } from './utils/data.utils'
+
+export type Robot = {
+  id: string
+  name: string
+  email: string
+}
+
 const App = () => {
-  const [robots, setRobots] = useState([])
-  const [filterRobots, setFilterRobots] = useState([])
+  const [robots, setRobots] = useState<Robot[]>([])
+  const [filterRobots, setFilterRobots] = useState<Robot[]>([])
   const [searchfeild, setSearchfeild] = useState('')
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
     const getRobots = async () => {
-      const res = await axios.get('https://jsonplaceholder.typicode.com/users')
-      const users = await res.data
+      const users = await getData<Robot[]>(
+        'https://jsonplaceholder.typicode.com/users'
+      )
       setRobots(users)
       setLoading(false)
     }
@@ -31,7 +38,7 @@ const App = () => {
     setFilterRobots(newfilterdRobots)
   }, [robots, searchfeild])
 
-  const onChange = (e) => {
+  const onChange = (e: ChangeEvent<HTMLInputElement>): void => {
     setSearchfeild(e.target.value)
   }
 
@@ -41,13 +48,13 @@ const App = () => {
 
   return (
     <div className='tc'>
-      <Header title='RoboFriends' searchChange={onChange} />
-      <Scroll>
+      <h1 className='f1'>RoboFriends</h1>
+      <SearchBox searchChange={onChange} />
+      <div style={{ borderTop: '3px solid black' }}>
         <ErrorBoundry>
           <CardList robots={filterRobots} />
         </ErrorBoundry>
-      </Scroll>
-      {/* <CardList robots={robots} searchfeild={searchfeild} /> */}
+      </div>
     </div>
   )
 }

@@ -1,6 +1,12 @@
 import Card from '../components/Card'
 
-const CardList = ({ robots }) => {
+import { Robot } from '../App'
+
+type CardListProps = {
+  robots: Robot[]
+}
+
+const CardList = ({ robots }: CardListProps) => {
   return (
     <div>
       {robots.map((robot) => (
@@ -14,7 +20,5 @@ const CardList = ({ robots }) => {
     </div>
   )
 }
-
-// id={robots[0].id} name={robots[0].name} email={robots[0].email}
 
 export default CardList
